@@ -1,0 +1,16 @@
+#!/bin/bash
+# Ease the search
+# Format:
+# ./search_file '$target_dir' '$target_word'
+
+if [ $# -lt 2 ]
+then
+    target_dir='/htdocs/www/drive/drive.classviva.com/'
+    target_word="$1"
+else
+    target_dir="$1"
+    target_word="$2"
+fi
+
+echo "${target_dir}:"
+grep -rnw $target_dir -e $target_word | sed 's|'$target_dir'\([^\*!{]*\.[a-z#~]*\):[0-9]*:.*|\1|g' | uniq
